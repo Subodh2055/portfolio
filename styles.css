@@ -327,7 +327,7 @@ nav ul li a:hover::after {
 
 .timeline-content {
     padding: 30px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.641);
     border-radius: 8px;
     box-shadow: var(--box-shadow);
     position: relative;
@@ -338,7 +338,7 @@ nav ul li a:hover::after {
     position: absolute;
     width: 20px;
     height: 20px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.641);
     top: 30px;
     transform: rotate(45deg);
     box-shadow: 1px -1px 1px rgba(0, 0, 0, 0.1);
