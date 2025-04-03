@@ -92,21 +92,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  //   // Form submission
-  //   const contactForm = document.querySelector(".contact-form");
-  //   if (contactForm) {
-  //     contactForm.addEventListener("submit", function (e) {
-  //       e.preventDefault();
-  //       fetch(contactForm.action, {
-  //         method: "POST",
-  //         body: new FormData(contactForm),
-  //       })
-  //       .then(response => response.ok ? alert("Email Sent Successfully!") : alert("Error sending email!"))
-  //       .then(() => contactForm.reset())
-  //       .catch(error => console.error("Error:", error));
-  //     });
-  //   }
-
   // Header scroll effect
   const header = document.querySelector("header");
   window.addEventListener("scroll", function () {
@@ -120,42 +105,52 @@ document.addEventListener("DOMContentLoaded", function () {
   // email sender
   emailjs.init("P7vsLl1LMUjGwlFCD");
 
-document.querySelector(".contact-form").addEventListener("submit", function (e) {
-  e.preventDefault();
+  document
+    .querySelector(".contact-form")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
 
-  const formData = new FormData(this);
-  const userEmail = formData.get("email");
+      const formData = new FormData(this);
+      const userEmail = formData.get("email");
 
-  // Validate email format
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!emailRegex.test(userEmail)) {
-    alert("Please provide a valid email address.");
-    return;
-  }
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(userEmail)) {
+        Toastify({
+          text: "Please provide a valid email address.",
+          duration: 3000,
+          gravity: "top",
+          position: "center",
+          backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+        }).showToast();
+        return;
+      }
 
-  // Log the data being sent
-  console.log({
-    to_email: "subodhbhandari4@example.com",
-    from_name: formData.get("name"),
-    from_email: userEmail,
-    message: formData.get("message"),
-  });
-
-  emailjs.send("service_wvczn3l", "template_7tf5rwn", {
-    to_email: "subodhbhandari4@gmail.com", 
-    from_name: formData.get("name"),
-    from_email: formData.get("email"),
-    message: formData.get("message"),
-  })
-  .then(response => {
-    alert("Email sent successfully!");
-    console.log("Success:", response);
-  })
-  .catch(error => {
-    alert("Failed to send email.");
-    console.error("Error:", error);
-  });
-
-});
-
+      emailjs
+        .send("service_wvczn3l", "template_7tf5rwn", {
+          to_email: "subodhbhandari4@gmail.com",
+          from_name: formData.get("name"),
+          from_email: userEmail,
+          message: formData.get("message"),
+        })
+        .then((response) => {
+          Toastify({
+            text: "Email sent successfully!",
+            duration: 3000,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          }).showToast();
+          console.log("Success:", response);
+        })
+        .catch((error) => {
+          Toastify({
+            text: "Failed to send email.",
+            duration: 3000,
+            gravity: "top",
+            position: "center",
+            backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
+          }).showToast();
+          console.error("Error:", error);
+        });
+    });
 });
