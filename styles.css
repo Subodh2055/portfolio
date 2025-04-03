@@ -911,3 +911,26 @@ footer {
   /* .image-placeholder {
     display: none;
   } */
+
+  .btn.sb_btn.tertiary_button {
+    font-family: 'Open Sans', sans-serif;
+    background: #fc3730;
+    color: white !important;
+    outline: 2px solid #ff5733;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn.sb_btn.tertiary_button:hover {
+    background: #ff5733;
+    outline: 2px solid #ffffff;
+    transform: scale(1.05);
+  }
+  
+  .btn.sb_btn.tertiary_button:focus {
+    outline: 3px solid #ff0000;
+  }
+  
+  
