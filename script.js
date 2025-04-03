@@ -153,4 +153,11 @@ document.addEventListener("DOMContentLoaded", function () {
           console.error("Error:", error);
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelector(".info-item").addEventListener("click", function () {
+          window.location.href = "https://mail.google.com/mail/?view=cm&to=subodhbhandari4@gmail.com";
+      });
+  });
+  
 });
