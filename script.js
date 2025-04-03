@@ -92,21 +92,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Form submission
-  const contactForm = document.querySelector(".contact-form");
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      fetch(contactForm.action, {
-        method: "POST",
-        body: new FormData(contactForm),
-      })
-      .then(response => response.ok ? alert("Email Sent Successfully!") : alert("Error sending email!"))
-      .then(() => contactForm.reset())
-      .catch(error => console.error("Error:", error));
-    });
-  }
-  
+  //   // Form submission
+  //   const contactForm = document.querySelector(".contact-form");
+  //   if (contactForm) {
+  //     contactForm.addEventListener("submit", function (e) {
+  //       e.preventDefault();
+  //       fetch(contactForm.action, {
+  //         method: "POST",
+  //         body: new FormData(contactForm),
+  //       })
+  //       .then(response => response.ok ? alert("Email Sent Successfully!") : alert("Error sending email!"))
+  //       .then(() => contactForm.reset())
+  //       .catch(error => console.error("Error:", error));
+  //     });
+  //   }
 
   // Header scroll effect
   const header = document.querySelector("header");
@@ -118,32 +117,45 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-// email sender
-  emailjs.init("P7vsLl1LMUjGwlFCD");  // Initialize EmailJS with your user ID
+  // email sender
+  emailjs.init("P7vsLl1LMUjGwlFCD");
 
- document.querySelector(".contact-form").addEventListener("submit", function (e) {
-  e.preventDefault();  // Prevent default form submission
+document.querySelector(".contact-form").addEventListener("submit", function (e) {
+  e.preventDefault();
 
   const formData = new FormData(this);
+  const userEmail = formData.get("email");
+
+  // Validate email format
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!emailRegex.test(userEmail)) {
+    alert("Please provide a valid email address.");
+    return;
+  }
+
+  // Log the data being sent
+  console.log({
+    to_email: "subodhbhandari4@example.com",
+    from_name: formData.get("name"),
+    from_email: userEmail,
+    message: formData.get("message"),
+  });
 
   emailjs.send("service_wvczn3l", "template_7tf5rwn", {
-    to_email: "subodhbhandari4@example.com",  // Your recipient email
+    to_email: "subodhbhandari4@gmail.com", 
     from_name: formData.get("name"),
     from_email: formData.get("email"),
     message: formData.get("message"),
   })
   .then(response => {
     alert("Email sent successfully!");
-    this.reset();  // Reset the form after sending
+    console.log("Success:", response);
   })
   .catch(error => {
     alert("Failed to send email.");
     console.error("Error:", error);
   });
+
 });
 
-
-  
-
-  
 });
