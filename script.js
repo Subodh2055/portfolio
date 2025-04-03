@@ -135,19 +135,20 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((response) => {
           Toastify({
             text: "Email sent successfully!",
-            duration: 3000,
+            duration: 1000,
             gravity: "top",
-            position: "center",
+            position: "right",
             backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
           }).showToast();
           console.log("Success:", response);
+          document.querySelector(".contact-form").reset();
         })
         .catch((error) => {
           Toastify({
             text: "Failed to send email.",
-            duration: 3000,
+            duration: 1000,
             gravity: "top",
-            position: "center",
+            position: "right",
             backgroundColor: "linear-gradient(to right, #ff5f6d, #ffc371)",
           }).showToast();
           console.error("Error:", error);
